@@ -1,9 +1,10 @@
 using Mirror;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 public class UnitSelectionHandler : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class UnitSelectionHandler : MonoBehaviour
     private RTSPlayer player;
     private Camera mainCamera;
     public List<Unit> SelectedUnits { get; } = new List<Unit>();
+    private void Awake()
+    {
+        EnhancedTouchSupport.Enable();
+    }
 
     private void Start()
     {
@@ -22,7 +27,6 @@ public class UnitSelectionHandler : MonoBehaviour
         player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
         Unit.AuthorityOnUnitDeSpawned += AuthorityHandleUnitDespawned;
         GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
-
     }
 
     private void OnDestroy()
@@ -30,18 +34,49 @@ public class UnitSelectionHandler : MonoBehaviour
         Unit.AuthorityOnUnitDeSpawned -= AuthorityHandleUnitDespawned;
         GameOverHandler.ClientOnGameOver -= ClientHandleGameOver;
     }
-
+    int TapCount;
+    public float MaxDubbleTapTime;
+    float NewTime;
     private void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                StartSelectionArea();
+            }
+            else if (Mouse.current.leftButton.wasReleasedThisFrame)
+            {
+                ClearSelectionArea();
+            }
+            else if (Mouse.current.leftButton.isPressed)
+            {
+                UpdateSelectionArea();
+            }
+        }
+        else
+        {
+            if (Touch.activeFingers.Count == 1)
+            {
+                if (Input.GetTouch(0).tapCount == 2)
+                {
+                    Select(Touch.activeTouches[0]);
+                }
+            }
+        }
+    }
+
+    private void Select(Touch touch)
+    {
+        if(touch.phase == TouchPhase.Began)
         {
             StartSelectionArea();
         }
-        else if (Mouse.current.leftButton.wasReleasedThisFrame)
+        else if(touch.phase == TouchPhase.Ended)
         {
             ClearSelectionArea();
         }
-        else if (Mouse.current.leftButton.isPressed)
+        else if(touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
         {
             UpdateSelectionArea();
         }
@@ -58,13 +93,28 @@ public class UnitSelectionHandler : MonoBehaviour
             SelectedUnits.Clear();
         }
         unitSelectionArea.gameObject.SetActive(true);
-        startPos = Mouse.current.position.ReadValue();
+        if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+            startPos = Mouse.current.position.ReadValue();
+        }
+        else
+        {
+            startPos = Input.GetTouch(0).position;
+        }
         UpdateSelectionArea();
     }
 
     private void UpdateSelectionArea()
     {
-        Vector2 mousePos = Mouse.current.position.ReadValue();
+        Vector2 mousePos;
+        if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+            mousePos = Mouse.current.position.ReadValue();
+        }
+        else
+        {
+            mousePos = Input.GetTouch(0).position;
+        }
         float areaWidth = mousePos.x - startPos.x;
         float areaHeight = mousePos.y - startPos.y;
 
@@ -77,7 +127,15 @@ public class UnitSelectionHandler : MonoBehaviour
         unitSelectionArea.gameObject.SetActive(false);
         if(unitSelectionArea.sizeDelta.magnitude == 0)
         {
-            Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            Ray ray;
+            if (SystemInfo.deviceType == DeviceType.Desktop)
+            {
+                ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            }
+            else
+            {
+                ray = mainCamera.ScreenPointToRay(Input.GetTouch(0).position);
+            }
             if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask)) { return; }
             if (!hit.collider.TryGetComponent<Unit>(out Unit unit)) { return; }
             if (!unit.hasAuthority) { return; }

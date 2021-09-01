@@ -1,7 +1,4 @@
 using Mirror;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,7 +17,6 @@ public class CameraController : NetworkBehaviour
     public override void OnStartAuthority()
     {
         playerCameraTransform.gameObject.SetActive(true);
-
         controls = new Controls();
 
         controls.Player.MoveCamera.performed += SetPreviousInput;
@@ -33,6 +29,51 @@ public class CameraController : NetworkBehaviour
     {
         if (!hasAuthority || !Application.isFocused) { return; }
         UpdateCameraPositon();
+    }
+
+    public void MoveUp(bool doo)
+    {
+        if (doo)
+        {
+            previousInput = Vector2.up;
+        }
+        else
+        {
+            previousInput = Vector2.zero;
+        }
+    }
+    public void MoveDown(bool doo)
+    {
+        if (doo)
+        {
+            previousInput = Vector2.down;
+        }
+        else
+        {
+            previousInput = Vector2.zero;
+        }
+    }
+    public void MoveLeft(bool doo)
+    {
+        if (doo)
+        {
+            previousInput = Vector2.left;
+        }
+        else
+        {
+            previousInput = Vector2.zero;
+        }
+    }
+    public void MoveRight(bool doo)
+    {
+        if (doo)
+        {
+            previousInput = Vector2.right;
+        }
+        else
+        {
+            previousInput = Vector2.zero;
+        }
     }
 
     private void UpdateCameraPositon()

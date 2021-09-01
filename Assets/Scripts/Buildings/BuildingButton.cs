@@ -46,9 +46,17 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if(buildingPreviewInstance == null) { return; }
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if(Physics.Raycast(ray,out RaycastHit hit, Mathf.Infinity, floorMask))
+        if (buildingPreviewInstance == null) { return; }
+        Ray ray;
+        if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+            ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        }
+        else
+        {
+            ray = mainCamera.ScreenPointToRay(Input.GetTouch(0).position);
+        }
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask))
         {
             player.CmdTryPlaceBuilding(building.GetId(), hit.point);
         }
@@ -57,7 +65,15 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     private void UpdateBuildingPreview()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray;
+        if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+            ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        }
+        else
+        {
+            ray = mainCamera.ScreenPointToRay(Input.GetTouch(0).position);
+        }
         if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask))
         {
             return;

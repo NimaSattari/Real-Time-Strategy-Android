@@ -40,7 +40,8 @@ public class LobbyMenu : MonoBehaviour
         {
             playerNameTexts[i].text = "Waiting...";
         }
-        startGameButton.interactable = players.Count >= 2;
+        //Change Count To 2
+        startGameButton.interactable = players.Count >= 1;
     }
     private void AuthorityHandlePartyOwnerStateUpdated(bool state)
     {

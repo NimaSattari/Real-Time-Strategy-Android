@@ -40,7 +40,8 @@ public class RTSNetworkManager : NetworkManager
 
     public void StartGame()
     {
-        if (Players.Count < 2) { return; }
+        //Change Count To 2
+        if (Players.Count < 1) { return; }
         isGameInProgress = true;
         ServerChangeScene("Map_1");
     }
@@ -73,8 +74,20 @@ public class RTSNetworkManager : NetworkManager
             {
                 GameObject baseInstance = Instantiate(unitBasePrefab, GetStartPosition().position, Quaternion.identity);
                 NetworkServer.Spawn(baseInstance, player.connectionToClient);
+#if UNITY_IOS || UNITY_ANDROID
+                player.SetActiveMobileInputs(true);
+#endif
             }
         }
+#if UNITY_IOS || UNITY_ANDROID
+        else
+        {
+            foreach (RTSPlayer player in Players)
+            {
+                player.SetActiveMobileInputs(false);
+            }
+        }
+#endif
     }
 
     #endregion

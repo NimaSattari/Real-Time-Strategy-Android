@@ -1,15 +1,25 @@
 using Mirror;
-using Steamworks;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+//using Steamworks;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject landingPagePanel;
-    [SerializeField] bool useSteam = false;
+    //[SerializeField] bool useSteam = false;
 
-    protected Callback<LobbyCreated_t> lobbyCreated;
+    public void HostLobby()
+    {
+        landingPagePanel.SetActive(false);
+        NetworkManager.singleton.StartHost();
+        print("Host Complete");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+/*    protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
 
@@ -34,7 +44,7 @@ public class MainMenu : MonoBehaviour
     }
     void OnLobyyCreated(LobbyCreated_t callback)
     {
-        if(callback.m_eResult != EResult.k_EResultOK)
+        if (callback.m_eResult != EResult.k_EResultOK)
         {
             landingPagePanel.SetActive(true);
             return;
@@ -53,5 +63,5 @@ public class MainMenu : MonoBehaviour
         NetworkManager.singleton.networkAddress = hostAddress;
         NetworkManager.singleton.StartClient();
         landingPagePanel.SetActive(false);
-    }
+    }*/
 }

@@ -22,6 +22,13 @@ public class RTSPlayer : NetworkBehaviour
     Color teamColor = new Color();
     [SyncVar(hook =nameof(ClientHandleDisplayNameUpdated))] string displayName;
 
+    [SerializeField] GameObject mobileInputs = null;
+
+    public void SetActiveMobileInputs(bool activity)
+    {
+        mobileInputs.SetActive(activity);
+    }
+
     public string GetDisplayName()
     {
         return displayName;

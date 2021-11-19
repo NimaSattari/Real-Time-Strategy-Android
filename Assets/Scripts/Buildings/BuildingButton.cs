@@ -20,6 +20,22 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     GameObject buildingPreviewInstance;
     Renderer buildingRendererInstance;
 
+    bool canAffordBuilding = true;
+    private bool CanAffordBuilding
+    {
+        get
+        {
+            return canAffordBuilding;
+        }
+        set
+        {
+            if (canAffordBuilding == value) return;
+
+            iconImage.color = (value) ? new Color(1f, 1f, 1f) : new Color(0.25f, 0.25f, 0.25f);
+            canAffordBuilding = value;
+        }
+    }
+
     private void Start()
     {
         mainCamera = Camera.main;
@@ -31,12 +47,19 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     private void Update()
     {
+        CanAffordBuilding = (building.GetPrice() <= player.GetResources());
         if (buildingPreviewInstance == null) { return; }
         UpdateBuildingPreview();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        UnitSelectionHandler unitSelection = FindObjectOfType<UnitSelectionHandler>();
+        foreach (Unit selectedUnit in unitSelection.SelectedUnits)
+        {
+            selectedUnit.DeSelect();
+        }
+        unitSelection.SelectedUnits.Clear();
         if (eventData.button != PointerEventData.InputButton.Left) { return; }
         if (player.GetResources() < building.GetPrice()) { return; }
         buildingPreviewInstance = Instantiate(building.GetBuildingPreview());

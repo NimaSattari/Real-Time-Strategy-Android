@@ -11,6 +11,10 @@ public class UnitMovement : NetworkBehaviour
     [SerializeField] private Targeter targeter = null;
     [SerializeField] private float chaseRange = 3f;
 
+    public bool HasWaypoint { get; [Server] set; }
+
+    public Vector3 MyWaypoint { get; [Server] set; }
+
     #region Server
 
     public override void OnStartServer()
@@ -27,21 +31,22 @@ public class UnitMovement : NetworkBehaviour
     private void Update()
     {
         animator.SetFloat("Move", agent.velocity.magnitude);
-        Targetable target = targeter.GetTarget();
+        Targetable target = targeter.Target;
         if (target != null)
         {
             if ((target.transform.position - transform.position).sqrMagnitude > chaseRange * chaseRange)
             {
-                agent.SetDestination(target.transform.position);
+                SetMyWaypoint(target.transform.position);
             }
             else if (agent.hasPath)
             {
-                agent.ResetPath();
+                ClearMyWaypoint();
             }
+            return;
         }
         if (!agent.hasPath) { return; }
         if (agent.remainingDistance > agent.stoppingDistance) { return; }
-        agent.ResetPath();
+        ClearMyWaypoint();
     }
 
     [Command] public void CmdMove(Vector3 position)
@@ -56,13 +61,28 @@ public class UnitMovement : NetworkBehaviour
         {
             return;
         }
-        agent.SetDestination(hit.position);
+        SetMyWaypoint(position);
+    }
+
+    [Server]
+    public void SetMyWaypoint(Vector3 position)
+    {
+        HasWaypoint = true;
+        MyWaypoint = position;
+        agent.SetDestination(position);
+    }
+
+    [Server]
+    public void ClearMyWaypoint()
+    {
+        HasWaypoint = false;
+        agent.ResetPath();
     }
 
     [Server]
     private void ServerHandleGameOver()
     {
-        agent.ResetPath();
+        ClearMyWaypoint();
     }
 
     #endregion

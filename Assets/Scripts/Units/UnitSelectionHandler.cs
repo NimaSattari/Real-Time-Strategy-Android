@@ -1,6 +1,8 @@
 using Mirror;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
@@ -10,16 +12,23 @@ public class UnitSelectionHandler : MonoBehaviour
 {
     [SerializeField] private RectTransform unitSelectionArea = null;
     [SerializeField] private LayerMask layerMask = new LayerMask();
+    [SerializeField] private GameObject unitPanelUI = null;
+    [SerializeField] private UnitUI unitImagePrefab = null;
+    [SerializeField] private List<UnitUI> unitImages = new List<UnitUI>();
 
     private Vector2 startPos;
 
     private RTSPlayer player;
     private Camera mainCamera;
     public List<Unit> SelectedUnits { get; } = new List<Unit>();
-    private void Awake()
+
+    Controls controls;
+
+
+/*    private void Awake()
     {
         EnhancedTouchSupport.Enable();
-    }
+    }*/
 
     private void Start()
     {
@@ -27,6 +36,11 @@ public class UnitSelectionHandler : MonoBehaviour
         player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
         Unit.AuthorityOnUnitDeSpawned += AuthorityHandleUnitDespawned;
         GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
+        controls = new Controls();
+
+        controls.Player.SelectAllUnits.performed += SelectAllUnits;
+
+        controls.Enable();
     }
 
     private void OnDestroy()
@@ -34,9 +48,6 @@ public class UnitSelectionHandler : MonoBehaviour
         Unit.AuthorityOnUnitDeSpawned -= AuthorityHandleUnitDespawned;
         GameOverHandler.ClientOnGameOver -= ClientHandleGameOver;
     }
-    int TapCount;
-    public float MaxDubbleTapTime;
-    float NewTime;
     private void Update()
     {
         if (SystemInfo.deviceType == DeviceType.Desktop)
@@ -60,10 +71,36 @@ public class UnitSelectionHandler : MonoBehaviour
             {
                 if (Input.GetTouch(0).tapCount == 2)
                 {
+                    if (IsOverUI(Touch.activeTouches[0]))
+                    {
+                        return;
+                    }
                     Select(Touch.activeTouches[0]);
                 }
             }
         }
+    }
+
+    private bool IsOverUI(Touch touch)
+    {
+        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        pointerData.position = touch.screenPosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        if (results.Count > 0)
+        {
+            for (int i = 0; i < results.Count; i++)
+            {
+                if (results[i].gameObject.GetComponent<CanvasRenderer>())
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     private void Select(Touch touch)
@@ -91,6 +128,7 @@ public class UnitSelectionHandler : MonoBehaviour
                 selectedUnit.DeSelect();
             }
             SelectedUnits.Clear();
+            unitImages.Clear();
         }
         unitSelectionArea.gameObject.SetActive(true);
         if (SystemInfo.deviceType == DeviceType.Desktop)
@@ -143,6 +181,10 @@ public class UnitSelectionHandler : MonoBehaviour
             foreach (Unit selectedUnit in SelectedUnits)
             {
                 selectedUnit.Select();
+                UnitUI unitImage = Instantiate(unitImagePrefab, unitPanelUI.transform);
+                selectedUnit.SetUnitUI(unitImage);
+                unitImage.unitImage.sprite = selectedUnit.GetImage();
+                unitImages.Add(unitImage);
             }
             return;
         }
@@ -157,7 +199,31 @@ public class UnitSelectionHandler : MonoBehaviour
             {
                 SelectedUnits.Add(unit1);
                 unit1.Select();
+                UnitUI unitImage = Instantiate(unitImagePrefab, unitPanelUI.transform);
+                unit1.SetUnitUI(unitImage);
+                unitImage.unitImage.sprite = unit1.GetImage();
+                unitImages.Add(unitImage);
             }
+        }
+    }
+
+    public IEnumerator SelectedFromSortedList(Unit unit)
+    {
+        yield return new WaitForSeconds(0.1f);
+        foreach (Unit selectedUnit in SelectedUnits)
+        {
+            selectedUnit.DeSelect();
+        }
+        SelectedUnits.Clear();
+        unitImages.Clear();
+        SelectedUnits.Add(unit);
+        foreach (Unit selectedUnit in SelectedUnits)
+        {
+            selectedUnit.Select();
+            UnitUI unitImage = Instantiate(unitImagePrefab, unitPanelUI.transform);
+            selectedUnit.SetUnitUI(unitImage);
+            unitImage.unitImage.sprite = selectedUnit.GetImage();
+            unitImages.Add(unitImage);
         }
     }
 
@@ -169,5 +235,24 @@ public class UnitSelectionHandler : MonoBehaviour
     private void ClientHandleGameOver(string winnerName)
     {
         enabled = false;
+    }
+
+    private void SelectAllUnits(InputAction.CallbackContext ctx)
+    {
+        foreach (Unit selectedUnit in SelectedUnits)
+        {
+            selectedUnit.DeSelect();
+        }
+        SelectedUnits.Clear();
+        unitImages.Clear();
+        foreach (Unit unit in player.GetMyUnits())
+        {
+            unit.Select();
+            SelectedUnits.Add(unit);
+            UnitUI unitImage = Instantiate(unitImagePrefab, unitPanelUI.transform);
+            unit.SetUnitUI(unitImage);
+            unitImage.unitImage.sprite = unit.GetImage();
+            unitImages.Add(unitImage);
+        }
     }
 }

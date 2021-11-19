@@ -471,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1740832644, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_AssetId
-      value: 
+      value: c1c18cdb1518f6c48add67176fdd3376
       objectReference: {fileID: 0}
     - target: {fileID: 552405516085756098, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: fireRate
@@ -488,6 +488,18 @@ PrefabInstance:
     - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_LocalPosition.x
@@ -541,6 +553,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b481660dcb9451b40830624c9828a8f5, type: 2}
+    - target: {fileID: 969177041334566437, guid: e34044077c9c6864a87040ad5e692002, type: 3}
+      propertyPath: id
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 969177041334566437, guid: e34044077c9c6864a87040ad5e692002, type: 3}
+      propertyPath: unitImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 116c8f8b866323a4ba541eec777f471a, type: 3}
     - target: {fileID: 969177041334566437, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: resourceCost
       value: 300

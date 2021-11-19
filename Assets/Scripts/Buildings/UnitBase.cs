@@ -11,6 +11,8 @@ public class UnitBase : NetworkBehaviour
     public static event Action<UnitBase> ServerOnBaseSpawned;
     public static event Action<UnitBase> ServerOnBaseDeSpawned;
     public static event Action<int> ServerOnPlayerDie;
+    public static event Action<UnitBase> AuthorityOnBaseSpawned;
+
 
     #region Server
 
@@ -19,6 +21,11 @@ public class UnitBase : NetworkBehaviour
         health.ServerOnDie += ServerHandleDie;
 
         ServerOnBaseSpawned?.Invoke(this);
+    }
+
+    public override void OnStartAuthority()
+    {
+        AuthorityOnBaseSpawned?.Invoke(this);
     }
 
     public override void OnStopServer()

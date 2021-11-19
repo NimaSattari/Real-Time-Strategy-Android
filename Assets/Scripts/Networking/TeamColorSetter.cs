@@ -7,6 +7,7 @@ public class TeamColorSetter : NetworkBehaviour
 {
     [SerializeField] private Renderer[] colorRenderers = new Renderer[0];
     [SyncVar(hook = nameof(HandleTeamColorUpdated))] private Color teamColor = new Color();
+    public Material white, blue, red, green, purple;
 
     #region Server
 
@@ -24,7 +25,33 @@ public class TeamColorSetter : NetworkBehaviour
     {
         foreach(Renderer renderer in colorRenderers)
         {
-            renderer.material.SetColor("_BaseColor", newColor);
+            if(renderer.GetComponent<SkinnedMeshRenderer>() != null)
+            {
+                if (teamColor == Color.red)
+                {
+                    renderer.GetComponent<SkinnedMeshRenderer>().material = red;
+                }
+                else if (teamColor == Color.blue)
+                {
+                    renderer.GetComponent<SkinnedMeshRenderer>().material = blue;
+                }
+                else if (teamColor == Color.green)
+                {
+                    renderer.GetComponent<SkinnedMeshRenderer>().material = green;
+                }
+                else if (teamColor == Color.magenta)
+                {
+                    renderer.GetComponent<SkinnedMeshRenderer>().material = purple;
+                }
+                else
+                {
+                    renderer.GetComponent<SkinnedMeshRenderer>().material = white;
+                }
+            }
+            else
+            {
+                renderer.material.SetColor("_BaseColor", newColor);
+            }
         }
     }
 

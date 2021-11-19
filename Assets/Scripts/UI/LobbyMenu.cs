@@ -10,7 +10,9 @@ public class LobbyMenu : MonoBehaviour
 {
     [SerializeField] GameObject lobbyUI;
     [SerializeField] Button startGameButton;
+    [SerializeField] GameObject mapChanger;
     [SerializeField] TMP_Text[] playerNameTexts = new TMP_Text[4];
+    [SerializeField] string mapName = "Map_1";
 
     private void Start()
     {
@@ -46,11 +48,17 @@ public class LobbyMenu : MonoBehaviour
     private void AuthorityHandlePartyOwnerStateUpdated(bool state)
     {
         startGameButton.gameObject.SetActive(state);
+        mapChanger.gameObject.SetActive(state);
+    }
+
+    public void SetMap(string map)
+    {
+        mapName = map;
     }
 
     public void StartGame()
     {
-        NetworkClient.connection.identity.GetComponent<RTSPlayer>().CmdStartGame();
+        NetworkClient.connection.identity.GetComponent<RTSPlayer>().CmdStartGame(mapName);
     }
 
     public void LeaveLobby()

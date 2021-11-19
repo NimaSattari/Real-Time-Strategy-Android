@@ -10,6 +10,16 @@ public class UnitProjectile : NetworkBehaviour
     [SerializeField] private float destroyAfterSeconds = 1f;
     [SerializeField] private float launchForce = 10f;
 
+    public int DamageToDeal
+    {
+        get
+        {
+            return damageToDeal;
+        }
+    }
+
+    public Transform OriginTransform { get; [Server] set; }
+
     void Start()
     {
         rigid.velocity = transform.forward * launchForce;

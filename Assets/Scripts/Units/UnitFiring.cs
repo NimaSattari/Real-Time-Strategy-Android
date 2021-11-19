@@ -15,10 +15,9 @@ public class UnitFiring : NetworkBehaviour
 
     private float lastFireTime;
 
-    [ServerCallback]
     private void Update()
     {
-        Targetable target = targeter.GetTarget();
+        Targetable target = targeter.Target;
         if (target == null) { return; }
         if (!CanFireAtTarget()) { return; }
         animator.SetBool("Attack", true);
@@ -34,15 +33,28 @@ public class UnitFiring : NetworkBehaviour
     }
     public void NewEvent()
     {
-        Quaternion projectileRotation = Quaternion.LookRotation(targeter.GetTarget().GetAimAtPoint().position - projectileSpawnPoint.position);
-        GameObject projectileInstance = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileRotation);
-        NetworkServer.Spawn(projectileInstance, connectionToClient);
+        if(targeter.Target == null)
+        {
+            animator.SetBool("Attack", false);
+            return;
+        }
+        if (targeter.Target.GetComponent<Health>().currentHealth <= 0)
+        {
+            targeter.ClearTarget();
+            animator.SetBool("Attack", false);
+        }
+        Quaternion projectileRotation = Quaternion.LookRotation(targeter.Target.GetAimAtPoint().position - projectileSpawnPoint.position);
+        GameObject projectileInstance =
+            Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileRotation);
+
+        UnitProjectile projectile = projectileInstance.GetComponent<UnitProjectile>();
+        projectile.OriginTransform = transform; NetworkServer.Spawn(projectileInstance, connectionToClient);
         lastFireTime = Time.time;
     }
 
     [Server]
     private bool CanFireAtTarget()
     {
-        return (targeter.GetTarget().transform.position - transform.position).sqrMagnitude <= fireRange * fireRange;
+        return (targeter.Target.transform.position - transform.position).sqrMagnitude <= fireRange * fireRange;
     }
 }

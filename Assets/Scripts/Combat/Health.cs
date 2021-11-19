@@ -9,11 +9,11 @@ public class Health : NetworkBehaviour
     [SerializeField] private int maxHealth = 100;
 
     [SyncVar(hook = nameof(HandleHealthUpdated))]
-    [SerializeField] private int currentHealth;
+    public int currentHealth;
 
     public event Action ServerOnDie;
     public event Action<int, int> ClientOnHealthUpdated;
-
+    public event Action<Transform> ServerOnTakeDamage;
     #region Server
 
     public override void OnStartServer()
@@ -34,6 +34,16 @@ public class Health : NetworkBehaviour
         DealDamage(currentHealth);
     }
 
+    [Server] public void DealDamage(UnitProjectile projectile)
+    {
+        if (currentHealth == 0) { return; }
+        if (projectile.OriginTransform) ServerOnTakeDamage?.Invoke(projectile.OriginTransform);
+
+        DealDamage(projectile.DamageToDeal);
+        if (currentHealth != 0) { return; }
+        GetComponent<Unit>().DeSelect();
+        ServerOnDie?.Invoke();
+    }
     [Server] public void DealDamage(int damageAmount)
     {
         if (currentHealth == 0) { return; }
@@ -41,7 +51,7 @@ public class Health : NetworkBehaviour
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0);
 
         if(currentHealth != 0) { return; }
-
+        GetComponent<Unit>().DeSelect();
         ServerOnDie?.Invoke();
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.SceneManagement;
 using System;
+using Steamworks;
 
 public class RTSNetworkManager : NetworkManager
 {
@@ -38,12 +39,12 @@ public class RTSNetworkManager : NetworkManager
         isGameInProgress = false;
     }
 
-    public void StartGame()
+    public void StartGame(string mapName)
     {
         //Change Count To 2
         if (Players.Count < 1) { return; }
         isGameInProgress = true;
-        ServerChangeScene("Map_1");
+        ServerChangeScene(mapName);
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn)
@@ -55,12 +56,27 @@ public class RTSNetworkManager : NetworkManager
         Players.Add(player);
 
         player.SetDisplayName($"Player {Players.Count}");
-
-        player.SetTeamColor(new Color(
-            UnityEngine.Random.Range(0f, 1f),
-            UnityEngine.Random.Range(0f, 1f),
-            UnityEngine.Random.Range(0f, 1f)
-            ));
+        //player.SetDisplayName(SteamUser.GetSteamID().ToString());
+        if(Players.Count == 1)
+        {
+            player.SetTeamColor(Color.blue);
+        }
+        else if(Players.Count == 2)
+        {
+            player.SetTeamColor(Color.red);
+        }
+        else if (Players.Count == 3)
+        {
+            player.SetTeamColor(Color.green);
+        }
+        else if (Players.Count == 4)
+        {
+            player.SetTeamColor(Color.magenta);
+        }
+        else
+        {
+            player.SetTeamColor(Color.white);
+        }
         player.SetPartyOwner(Players.Count == 1);
     }
 

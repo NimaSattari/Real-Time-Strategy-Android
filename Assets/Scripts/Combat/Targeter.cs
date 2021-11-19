@@ -8,11 +8,19 @@ public class Targeter : NetworkBehaviour
     private Targetable target;
     [SerializeField] Animator animator;
 
-    public Targetable GetTarget()
+    public Targetable Target
     {
-        return target;
-    }
+        get
+        {
+            return target;
+        }
 
+        [Server]
+        set
+        {
+            target = value;
+        }
+    }
     public override void OnStartServer()
     {
         GameOverHandler.ServerOnGameOver += ServerHandleGameOver;
@@ -31,7 +39,6 @@ public class Targeter : NetworkBehaviour
 
     [Server] public void ClearTarget()
     {
-        animator.SetBool("Attack", false);
         target = null;
     }
 

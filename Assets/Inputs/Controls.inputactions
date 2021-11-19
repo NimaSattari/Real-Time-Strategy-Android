@@ -12,6 +12,30 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Reset Camera",
+                    "type": "Button",
+                    "id": "6c357fdc-9d61-4927-94b2-d5d7ad87e1bf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Zoom Camera",
+                    "type": "Value",
+                    "id": "0473577a-2e2d-4988-b388-16b890d9f1cb",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Select All Units",
+                    "type": "Button",
+                    "id": "a2336033-c3a2-478a-95b9-0dd5c57cedda",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -133,6 +157,39 @@
                     "processors": "",
                     "groups": "GamePad",
                     "action": "Move Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0276d56a-c2e4-4356-8b9d-02ffb5d1ea8e",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Reset Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4166474b-03bc-4989-a4e8-f0ef6edc7331",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Zoom Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a63300a-f77f-43b9-bdf9-9eef13b4a917",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Select All Units",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -31,7 +31,15 @@ public class MiniMap : MonoBehaviour, IPointerDownHandler, IDragHandler
 
     private void MoveCamera()
     {
-        Vector2 mousePos = Mouse.current.position.ReadValue();
+        Vector2 mousePos;
+        if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+            mousePos = Mouse.current.position.ReadValue();
+        }
+        else
+        {
+            mousePos = Input.GetTouch(0).position;
+        }
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(
             minimapRect, mousePos, null, out Vector2 localPoint)) { return; }
 

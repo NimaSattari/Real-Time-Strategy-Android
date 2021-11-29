@@ -126,6 +126,10 @@ public class UnitSelectionHandler : MonoBehaviour
             foreach (Unit selectedUnit in SelectedUnits)
             {
                 selectedUnit.DeSelect();
+                if (selectedUnit.unitUI.gameObject != null)
+                {
+                    Destroy(selectedUnit.unitUI.gameObject);
+                }
             }
             SelectedUnits.Clear();
             unitImages.Clear();
@@ -213,6 +217,10 @@ public class UnitSelectionHandler : MonoBehaviour
         foreach (Unit selectedUnit in SelectedUnits)
         {
             selectedUnit.DeSelect();
+            if (selectedUnit.unitUI.gameObject != null)
+            {
+                Destroy(selectedUnit.unitUI.gameObject);
+            }
         }
         SelectedUnits.Clear();
         unitImages.Clear();
@@ -242,6 +250,10 @@ public class UnitSelectionHandler : MonoBehaviour
         foreach (Unit selectedUnit in SelectedUnits)
         {
             selectedUnit.DeSelect();
+            if (selectedUnit.unitUI.gameObject != null)
+            {
+                Destroy(selectedUnit.unitUI.gameObject);
+            }
         }
         SelectedUnits.Clear();
         unitImages.Clear();

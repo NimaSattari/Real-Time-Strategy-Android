@@ -13,6 +13,7 @@ public class UnitBase : NetworkBehaviour
     public static event Action<int> ServerOnPlayerDie;
     public static event Action<UnitBase> AuthorityOnBaseSpawned;
 
+    public string playerName;
 
     #region Server
 

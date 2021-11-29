@@ -39,7 +39,10 @@ public class UnitProjectile : NetworkBehaviour
         }
         if(other.TryGetComponent<Health>(out Health health))
         {
-            health.DealDamage(damageToDeal);
+            if (!health.HasStartedDeath)
+            {
+                health.DealDamage(this);
+            }
         }
         DestroySelf();
     }

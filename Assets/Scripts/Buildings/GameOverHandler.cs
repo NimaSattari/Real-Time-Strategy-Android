@@ -38,8 +38,8 @@ public class GameOverHandler : NetworkBehaviour
 
         bases.Remove(unitBase);
         if(bases.Count != 1) { return; }
-        int playerId = bases[0].connectionToClient.connectionId;
-        RpcGameOver($"Player {playerId}");
+        string playerId = bases[0].playerName;
+        RpcGameOver($"{playerId}");
         ServerOnGameOver?.Invoke();
     }
 

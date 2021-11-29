@@ -10,6 +10,7 @@ public class Chat : NetworkBehaviour
     [SerializeField] private GameObject chatUI;
     [SerializeField] private TMP_Text chatText;
     [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private RTSPlayer player;
 
     private static event Action<string> OnMessage;
 
@@ -43,7 +44,7 @@ public class Chat : NetworkBehaviour
     [Command]
     private void CmdSendMessage(string message)
     {
-        RpcHandleMessage($"[{connectionToClient.connectionId}]: { message}");
+        RpcHandleMessage($"[{player.GetDisplayName()}]: { message}");
     }
 
     [ClientRpc]

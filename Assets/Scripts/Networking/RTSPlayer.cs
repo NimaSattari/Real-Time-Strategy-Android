@@ -266,6 +266,7 @@ public class RTSPlayer : NetworkBehaviour
 
     private void AddUnitToSortedList(Unit addedUnit)
     {
+        myBuildings[0].GetComponent<UnitBase>().playerName = GetDisplayName();
         allUnitsSortedUI.SetActive(true);
         if (addedUnit.id == 0)
         {

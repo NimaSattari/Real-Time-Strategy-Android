@@ -182,7 +182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7395003428354945856, guid: 6f88bf9337013334185a1db556f8c650, type: 3}
       propertyPath: launchForce
-      value: 6.5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7395003428354945856, guid: 6f88bf9337013334185a1db556f8c650, type: 3}
       propertyPath: damageToDeal

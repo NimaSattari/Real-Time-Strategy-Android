@@ -901,6 +901,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4840329869109797850, guid: e34044077c9c6864a87040ad5e692002, type: 3}
+      propertyPath: chaseRange
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1740832644, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: sceneId
       value: 0
@@ -914,6 +918,10 @@ PrefabInstance:
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 552405516085756098, guid: e34044077c9c6864a87040ad5e692002, type: 3}
+      propertyPath: fireRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 552405516085756098, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 1194152792601140692, guid: 075a826e4a33801499851c7a43960655, type: 3}
@@ -923,15 +931,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1007,7 +1015,7 @@ PrefabInstance:
       objectReference: {fileID: 9035073933939418113}
     - target: {fileID: 8649374561828544590, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_Speed
-      value: 4.5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8836141151956246172, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_Height

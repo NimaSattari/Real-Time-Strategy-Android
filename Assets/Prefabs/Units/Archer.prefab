@@ -903,7 +903,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4840329869109797850, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: chaseRange
-      value: 8
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1740832644, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: sceneId
@@ -919,7 +919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 552405516085756098, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: fireRange
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 552405516085756098, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: projectilePrefab
@@ -1043,7 +1043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8649374561828544590, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_Speed
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8649374561828544590, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_AngularSpeed

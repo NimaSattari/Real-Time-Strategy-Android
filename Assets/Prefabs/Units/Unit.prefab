@@ -282,7 +282,7 @@ MonoBehaviour:
   projectileSpawnPoint: {fileID: 7880218250644382276}
   fireRange: 3
   fireRate: 1
-  rotationSpeed: 180
+  rotationSpeed: 360
   animator: {fileID: 943370005884946173}
 --- !u!114 &6848519483314845230
 MonoBehaviour:

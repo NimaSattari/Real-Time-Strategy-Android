@@ -2001,7 +2001,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4840329869109797850, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: chaseRange
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1740832644, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: sceneId
@@ -2017,7 +2017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 552405516085756098, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: fireRange
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 552405516085756098, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: projectilePrefab
@@ -2029,15 +2029,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 943370005877172517, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2129,7 +2129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8649374561828544590, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_Speed
-      value: 7.5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8649374561828544590, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_Radius

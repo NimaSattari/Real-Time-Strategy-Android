@@ -1,7 +1,5 @@
 using Mirror;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -54,6 +52,7 @@ public class Unit : NetworkBehaviour
         ServerOnUnitSpawned?.Invoke(this);
         health.ServerOnTakeDamage += ServerHandleTakeDamage;
         health.ServerOnDie += ServerHandleDie;
+        health.ServerOnDie += ClientHandleDie;
     }
 
     public override void OnStopServer()
@@ -61,6 +60,7 @@ public class Unit : NetworkBehaviour
         ServerOnUnitDeSpawned?.Invoke(this);
         health.ServerOnTakeDamage -= ServerHandleTakeDamage;
         health.ServerOnDie -= ServerHandleDie;
+        health.ServerOnDie -= ClientHandleDie;
     }
 
     [Server]
@@ -107,11 +107,15 @@ public class Unit : NetworkBehaviour
     {
         if (!hasAuthority) { return; }
         onDeSelected?.Invoke();
+    }
+
+    [Client]
+    public void ClientHandleDie()
+    {
         if (unitUI.gameObject != null)
         {
             Destroy(unitUI.gameObject);
         }
     }
-
     #endregion
 }

@@ -16,6 +16,8 @@ public class Health : NetworkBehaviour
     public event Action<Transform> ServerOnTakeDamage;
     #region Server
 
+    public bool HasStartedDeath { get; [Server] set; }
+
     public override void OnStartServer()
     {
         currentHealth = maxHealth;
@@ -41,7 +43,10 @@ public class Health : NetworkBehaviour
 
         DealDamage(projectile.DamageToDeal);
         if (currentHealth != 0) { return; }
-        GetComponent<Unit>().DeSelect();
+        if(TryGetComponent(out Unit unit))
+        {
+            unit.DeSelect();
+        }
         ServerOnDie?.Invoke();
     }
     [Server] public void DealDamage(int damageAmount)
@@ -51,7 +56,10 @@ public class Health : NetworkBehaviour
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0);
 
         if(currentHealth != 0) { return; }
-        GetComponent<Unit>().DeSelect();
+        if (TryGetComponent(out Unit unit))
+        {
+            unit.DeSelect();
+        }
         ServerOnDie?.Invoke();
     }
 

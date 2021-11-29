@@ -342,6 +342,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingButton (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_text
+      value: "\uFEE3\uFECC\uFEAA\u0646 \uFEC3\uFEFC"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: originalText
+      value: "\u0645\u0639\u062F\u0646 \u0637\u0644\u0627"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
 --- !u!224 &6699652125133383658 stripped
@@ -456,6 +468,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_text
+      value: "\uFB58\uFBFF\uFE8E\u062F\u0647 \uFEE7\uFEC8\uFE8E\u0645"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: originalText
+      value: "\u067E\u064A\u0627\u062F\u0647 \u0646\u0638\u0627\u0645"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
 --- !u!224 &8742603693432788271 stripped
@@ -565,6 +593,18 @@ PrefabInstance:
     - target: {fileID: 6521181910285519291, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
       propertyPath: m_Name
       value: BuildingButton (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_text
+      value: "\uFEB3\uFEEE\u0627\u0631\uFB90\uFE8E\u0631"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: originalText
+      value: "\u0633\u0648\u0627\u0631\u06A9\u0627\u0631"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
@@ -676,6 +716,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingButton (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_text
+      value: "\uFEB3\uFEE8\uFB93 \u0627\uFEE7\uFEAA\u0627\u0632"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: originalText
+      value: "\u0633\u0646\u06AF \u0627\u0646\u062F\u0627\u0632"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
 --- !u!224 &1596785929168659171 stripped
@@ -786,6 +838,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingButton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_text
+      value: "\uFEE7\uFBFF\uFEB0\u0647 \u062F\u0627\u0631"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: originalText
+      value: "\u0646\u064A\u0632\u0647 \u062F\u0627\u0631"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
 --- !u!224 &3995150068652585873 stripped
@@ -895,6 +959,18 @@ PrefabInstance:
     - target: {fileID: 6521181910285519291, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
       propertyPath: m_Name
       value: BuildingButton (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_text
+      value: "\uFE97\uFBFF\uFEAE\u0627\uFEE7\uFEAA\u0627\u0632"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: originalText
+      value: "\u062A\u064A\u0631\u0627\u0646\u062F\u0627\u0632"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696712463769868038, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 905cf1dd4c3c1414d83e86ba8da66876, type: 3}

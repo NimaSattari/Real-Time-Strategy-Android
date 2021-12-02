@@ -14,6 +14,8 @@ public class Health : NetworkBehaviour
     public event Action ServerOnDie;
     public event Action<int, int> ClientOnHealthUpdated;
     public event Action<Transform> ServerOnTakeDamage;
+
+    [SerializeField] GameObject buildingExplosion, humanExplosion, buildingDamage, humanDamage;
     #region Server
 
     public bool HasStartedDeath { get; [Server] set; }
@@ -56,10 +58,10 @@ public class Health : NetworkBehaviour
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0);
 
         if(currentHealth != 0) { return; }
-        if (TryGetComponent(out Unit unit))
+/*        if (TryGetComponent(out Unit unit))
         {
             unit.DeSelect();
-        }
+        }*/
         ServerOnDie?.Invoke();
     }
 
@@ -70,6 +72,36 @@ public class Health : NetworkBehaviour
     private void HandleHealthUpdated(int oldHealth,int newHealth)
     {
         ClientOnHealthUpdated?.Invoke(newHealth, maxHealth);
+        if (TryGetComponent(out Unit unit) && currentHealth != 0)
+        {
+            AudioManagerMainMenu.instance.PlayHHurtSound();
+            if(currentHealth != maxHealth)
+            {
+                GameObject humanDamageInstance = Instantiate(humanDamage.gameObject, this.transform.position, humanDamage.transform.rotation);
+                NetworkServer.Spawn(humanDamageInstance, connectionToClient);
+            }
+        }
+        else if(!TryGetComponent(out Unit unit1) && currentHealth != 0)
+        {
+            AudioManagerMainMenu.instance.PlayBHurtSound();
+            if (currentHealth != maxHealth)
+            {
+                GameObject buildingDamageInstance = Instantiate(buildingDamage.gameObject, this.transform.position, buildingDamage.transform.rotation);
+                NetworkServer.Spawn(buildingDamageInstance, connectionToClient);
+            }
+        }
+        else if (TryGetComponent(out Unit unit2) && currentHealth <= 0)
+        {
+            AudioManagerMainMenu.instance.PlayHDieSound();
+            GameObject humanExplosionInstance = Instantiate(humanExplosion.gameObject, this.transform.position, humanExplosion.transform.rotation);
+            NetworkServer.Spawn(humanExplosionInstance, connectionToClient);
+        }
+        else if (!TryGetComponent(out Unit unit3) && currentHealth <= 0)
+        {
+            AudioManagerMainMenu.instance.PlayBDieSound();
+            GameObject buildingExplosionInstance = Instantiate(buildingExplosion.gameObject, this.transform.position, buildingExplosion.transform.rotation);
+            NetworkServer.Spawn(buildingExplosionInstance, connectionToClient);
+        }
     }
 
     #endregion

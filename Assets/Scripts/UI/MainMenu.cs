@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
 
     public void Quit()
     {
+        AudioManagerMainMenu.instance.PlayJoinSound();
         Application.Quit();
     }
 

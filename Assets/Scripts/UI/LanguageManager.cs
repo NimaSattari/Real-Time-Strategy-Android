@@ -16,11 +16,13 @@ public class LanguageManager : MonoBehaviour
     }
     public void SettingLanguageEN()
     {
+        AudioManagerMainMenu.instance.PlayChangeSound();
         PlayerPrefs.SetString("language", "EN");
         SettingLanguage?.Invoke();
     }
     public void SettingLanguageFA()
     {
+        AudioManagerMainMenu.instance.PlayChangeSound();
         PlayerPrefs.SetString("language", "FA");
         SettingLanguage?.Invoke();
     }

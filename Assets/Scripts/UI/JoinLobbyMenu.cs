@@ -32,6 +32,7 @@ public class JoinLobbyMenu : MonoBehaviour
     }
     private void HandleClientConnected()
     {
+        AudioManagerMainMenu.instance.PlayJoinSound();
         joinButton.interactable = true;
         gameObject.SetActive(false);
         landingPagePanel.SetActive(false);

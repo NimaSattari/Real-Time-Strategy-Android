@@ -1,4 +1,4 @@
-using Mirror;
+﻿using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -29,18 +29,26 @@ public class LobbyMenu : MonoBehaviour
 
     private void HandleClientConnented()
     {
+        AudioManagerMainMenu.instance.PlayJoinSound();
         lobbyUI.SetActive(true);
     }
     private void ClientHandleInfoUpdated()
     {
         List<RTSPlayer> players = ((RTSNetworkManager)NetworkManager.singleton).Players;
-        for(int i = 0; i < players.Count; i++)
+        for (int i = 0; i < players.Count; i ++)
         {
             playerNameTexts[i].text = players[i].GetDisplayName();
         }
-        for(int i = players.Count; i < playerNameTexts.Length; i++)
+        for (int i = players.Count; i < playerNameTexts.Length; i ++)
         {
-            playerNameTexts[i].text = "Waiting...";
+            if (PlayerPrefs.GetString("language") == "FA")
+            {
+                playerNameTexts[i].text = "در حال انتظار...";
+            }
+            else if (PlayerPrefs.GetString("language") == "EN")
+            {
+                playerNameTexts[i].text = "Waiting...";
+            }
         }
         //Change Count To 2
         startGameButton.interactable = players.Count >= 1;
@@ -53,6 +61,7 @@ public class LobbyMenu : MonoBehaviour
 
     public void SetMap(string map)
     {
+        AudioManagerMainMenu.instance.PlayChangeSound();
         mapName = map;
     }
 
@@ -63,6 +72,7 @@ public class LobbyMenu : MonoBehaviour
 
     public void LeaveLobby()
     {
+        AudioManagerMainMenu.instance.PlaySelectSound();
         if (NetworkServer.active && NetworkClient.isConnected)
         {
             NetworkManager.singleton.StopHost();

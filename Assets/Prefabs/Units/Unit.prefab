@@ -300,6 +300,10 @@ MonoBehaviour:
   syncInterval: 0.1
   maxHealth: 100
   currentHealth: 0
+  buildingExplosion: {fileID: 1584481546719536, guid: 94f55021adc743447972e33009b6eda2, type: 3}
+  humanExplosion: {fileID: 1584481546719536, guid: 474745d45af43c24688857baa78c4c8a, type: 3}
+  buildingDamage: {fileID: 1665973959669290, guid: 4cbee084c386e7e4b8e3919f92246d08, type: 3}
+  humanDamage: {fileID: 1665973959669290, guid: a8938692e5455c24bb9012f953918725, type: 3}
 --- !u!114 &6132617519254080771
 MonoBehaviour:
   m_ObjectHideFlags: 0

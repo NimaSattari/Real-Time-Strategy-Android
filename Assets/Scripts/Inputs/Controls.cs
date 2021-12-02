@@ -49,6 +49,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ec6615d-21ea-4a91-aa46-6a07b004159a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -205,6 +213,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Select All Units"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8cb8849-d78b-46a9-b4fe-4212dd1bcc5e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -245,6 +264,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_ResetCamera = m_Player.FindAction("Reset Camera", throwIfNotFound: true);
         m_Player_ZoomCamera = m_Player.FindAction("Zoom Camera", throwIfNotFound: true);
         m_Player_SelectAllUnits = m_Player.FindAction("Select All Units", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -298,6 +318,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_ResetCamera;
     private readonly InputAction m_Player_ZoomCamera;
     private readonly InputAction m_Player_SelectAllUnits;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -306,6 +327,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @ResetCamera => m_Wrapper.m_Player_ResetCamera;
         public InputAction @ZoomCamera => m_Wrapper.m_Player_ZoomCamera;
         public InputAction @SelectAllUnits => m_Wrapper.m_Player_SelectAllUnits;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -327,6 +349,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @SelectAllUnits.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectAllUnits;
                 @SelectAllUnits.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectAllUnits;
                 @SelectAllUnits.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectAllUnits;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -343,6 +368,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @SelectAllUnits.started += instance.OnSelectAllUnits;
                 @SelectAllUnits.performed += instance.OnSelectAllUnits;
                 @SelectAllUnits.canceled += instance.OnSelectAllUnits;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -371,5 +399,6 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnResetCamera(InputAction.CallbackContext context);
         void OnZoomCamera(InputAction.CallbackContext context);
         void OnSelectAllUnits(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

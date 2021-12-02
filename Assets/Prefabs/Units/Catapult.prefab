@@ -593,6 +593,14 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 6848519483314845230, guid: e34044077c9c6864a87040ad5e692002, type: 3}
+      propertyPath: humanDamage
+      value: 
+      objectReference: {fileID: 1665973959669290, guid: 4cbee084c386e7e4b8e3919f92246d08, type: 3}
+    - target: {fileID: 6848519483314845230, guid: e34044077c9c6864a87040ad5e692002, type: 3}
+      propertyPath: humanExplosion
+      value: 
+      objectReference: {fileID: 1584481546719536, guid: 94f55021adc743447972e33009b6eda2, type: 3}
     - target: {fileID: 7880218250644382276, guid: e34044077c9c6864a87040ad5e692002, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.81

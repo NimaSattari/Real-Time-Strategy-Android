@@ -92,6 +92,7 @@ public class Unit : NetworkBehaviour
     public override void OnStopClient()
     {
         if (!hasAuthority) { return; }
+        DeSelect();
         AuthorityOnUnitDeSpawned?.Invoke(this);
     }
 

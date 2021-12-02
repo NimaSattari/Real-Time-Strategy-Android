@@ -50,6 +50,7 @@ public class GameOverHandler : NetworkBehaviour
     [ClientRpc]
     private void RpcGameOver(string winner)
     {
+        AudioManagerMainMenu.instance.PlayWinSound();
         ClientOnGameOver?.Invoke(winner);
     }
 

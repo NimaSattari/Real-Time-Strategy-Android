@@ -1,6 +1,7 @@
 # Real-Time-Strategy-Android
 
 known bugs:
+
   به هم ریخته شدن چت فارسی از خط دوم
   
   پخش انیمیشن فقط در سمت سرور
